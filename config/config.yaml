@@ -1,0 +1,4 @@
+artifact_dir: 
+
+  data_ingenstion:
+    root_dir : artifact/data_ingenstion

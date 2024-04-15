@@ -1,0 +1,11 @@
+
+notebook
+pandas 
+numpy
+tensorflow
+keras
+nltk
+from_root
+python-box
+ensure
+-e .
