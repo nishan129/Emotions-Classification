@@ -2,8 +2,7 @@ from src.emotion.components.data_ingestion import DataIngenstion
 from src.emotion import logging, ModelException
 from src.emotion.config.configuration import ConfigurationManager
 from src.emotion.constant import *
-from src.emotion.pipeline.data_ingestion import DataIngenstionPipeline
-from src.emotion.pipeline.data_validation import DataValidationPipeline
+from src.emotion.pipeline.data_validation_pipeline import DataValidationPipeline
 import sys
 
 

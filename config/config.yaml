@@ -6,5 +6,6 @@ data_ingestion:
 data_validation:
     root_dir: artifacts/data_validation
     data_path: artifacts/data_ingestion/text.csv
+    STATUS_FILE: artifacts/data_validation/status.txt
     train_data_dir: artifacts/data_validation/train.csv
     test_data_dir: artifacts/data_validation/test.csv
