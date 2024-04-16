@@ -1,0 +1,4 @@
+COLUMNS :
+
+  text : str
+  label : int

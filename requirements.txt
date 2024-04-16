@@ -9,4 +9,5 @@ from_root
 python-box
 ensure
 kaggle
+scikit-learn
 -e .
