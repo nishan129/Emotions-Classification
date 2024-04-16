@@ -8,4 +8,5 @@ nltk
 from_root
 python-box
 ensure
+kaggle
 -e .
