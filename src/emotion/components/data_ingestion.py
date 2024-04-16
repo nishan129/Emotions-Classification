@@ -1,6 +1,5 @@
 import os
 from kaggle.api.kaggle_api_extended import KaggleApi
-from src.emotion.config.configuration import ConfigurationManager
 from src.emotion.entity.config_entity import DataIngestionConfig
 from src.emotion import ModelException,logging
 import sys

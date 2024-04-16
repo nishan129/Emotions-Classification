@@ -1,4 +1,4 @@
-from src.emotion.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from src.emotion.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from src.emotion import logging, ModelException
 from src.emotion.utils.common import read_yaml, create_directory
 from pathlib import Path
@@ -41,5 +41,19 @@ class ConfigurationManager:
                 all_schema=schema
             )
             return data_validation_config
+        except Exception as e:
+            raise ModelException(e,sys)
+        
+    def get_data_transformation_config(self) -> DataTransformationConfig :
+        try:
+            data_dir = self.config.data_transformation
+            create_directory([data_dir.root_dir])
+            data_transformation_config = DataTransformationConfig(
+                root_dir= data_dir.root_dir,
+                data_path= data_dir.data_path,
+                transform_data_path=data_dir.transform_data_path,
+            )
+        
+            return data_transformation_config
         except Exception as e:
             raise ModelException(e,sys)
