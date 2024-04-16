@@ -16,30 +16,46 @@ class DataValidation:
         try:
             data = pd.read_csv(self.config.data_path)
             data.drop(columns='Unnamed: 0', inplace=True)
-            X_train, X_test = train_test_split(data,test_size=0.1, random_state=42)
-            X_train.to_csv(self.config.train_data_dir)
-            X_test.to_csv(self.config.test_data_dir)
+            self.X_train, self.X_test = train_test_split(data,test_size=0.1, random_state=42)
         except Exception as e:
             raise ModelException(e,sys)
         
     def validate_all_columns(self) -> bool:
         try:
-            validation_status = None
+            train_validation_status = None
             
-            data = pd.read_csv(self.config.data_path)
-            data.drop(columns='Unnamed: 0', inplace=True)
-            all_coll = list(data.columns)
+            train = self.X_train
+            test = self.X_test
+            all_coll = list(train.columns)
             
             all_schema = self.config.all_schema.keys()
             
             for col in all_coll:
                 if col not in all_schema:
-                    validation_status = False
+                    train_validation_status = False
                     with open(self.config.STATUS_FILE, 'w') as f:
-                        f.write(f"Validation status is {validation_status}")
+                        f.write(f"Train Data Validation status is {train_validation_status}")
                 else:
-                    validation_status = True
+                    train_validation_status = True
                     with open(self.config.STATUS_FILE, 'w') as f:
-                        f.write(f"Validation status is {validation_status}")
+                        f.write(f"Train Data Validation status is {train_validation_status} \n")
+                        logging.info(f"Train Data Validation status is {train_validation_status}")
+                        
+            test_validation_status = None
+            all_coll = list(test.columns)
+            
+            all_schema = self.config.all_schema.keys()
+            
+            for col in all_coll:
+                if col not in all_schema:
+                    test_validation_status = False
+                    with open(self.config.STATUS_FILE, 'w') as f:
+                        f.write(f"Test Data Validation status is {test_validation_status}")
+                else:
+                    test_validation_status = True
+                    with open(self.config.STATUS_FILE, "a") as f:
+                        f.write(f"Test Data Validation status is {test_validation_status}\n")
+                        f.close()
+                        logging.info(f"Test Data Validation status is {test_validation_status}")
         except Exception as e:
             raise ModelException(e,sys)

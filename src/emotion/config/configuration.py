@@ -38,8 +38,6 @@ class ConfigurationManager:
                 root_dir= data_dir.root_dir,
                 data_path=data_dir.data_path,
                 STATUS_FILE= data_dir.STATUS_FILE,
-                train_data_dir= data_dir.train_data_dir,
-                test_data_dir=data_dir.test_data_dir,
                 all_schema=schema
             )
             return data_validation_config

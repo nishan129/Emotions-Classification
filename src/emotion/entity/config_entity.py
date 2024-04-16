@@ -12,5 +12,4 @@ class DataValidationConfig:
     data_path: Path
     STATUS_FILE: Path
     all_schema : dict
-    train_data_dir : Path
-    test_data_dir : Path
+    
