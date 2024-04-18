@@ -10,4 +10,6 @@ python-box
 ensure
 kaggle
 scikit-learn
+torch
+transformers
 -e .

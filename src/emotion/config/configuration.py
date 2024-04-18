@@ -1,4 +1,4 @@
-from src.emotion.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.emotion.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 from src.emotion import logging, ModelException
 from src.emotion.utils.common import read_yaml, create_directory
 from pathlib import Path
@@ -55,5 +55,22 @@ class ConfigurationManager:
             )
         
             return data_transformation_config
+        except Exception as e:
+            raise ModelException(e,sys)
+        
+        
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        try:
+            data_dir = self.config.model_trainer
+            create_directory([data_dir.root_dir,data_dir.model])
+            model_trainer_config = ModelTrainerConfig(
+                root_dir=data_dir.root_dir,
+                data_path=data_dir.data_path,
+                model = data_dir.model,
+                tokenizer_path=data_dir.tokenizer_path,
+                model_path=data_dir.model_path,
+            )
+            
+            return model_trainer_config
         except Exception as e:
             raise ModelException(e,sys)

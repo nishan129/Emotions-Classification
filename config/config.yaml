@@ -13,3 +13,11 @@ data_transformation:
     root_dir: artifacts/data_transformation
     data_path: artifacts/data_ingestion/text.csv
     transform_data_path: artifacts/data_transformation/text.csv
+
+model_trainer:
+    root_dir: artifacts/model_trainer
+    data_path: artifacts/data_transformation/text.csv
+    model : artifacts/model_trainer/model
+    tokenizer_path: artifacts/model_trainer/tokenizer.pkl
+    model_path: artifacts/model_trainer/model/model.h5
+    

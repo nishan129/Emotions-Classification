@@ -5,7 +5,7 @@ import nltk
 import pandas as pd
 import re, os, sys
 from pathlib import Path
-from nltk.stem import SnowballStemmer
+from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
@@ -36,19 +36,20 @@ class DataTransformation:
     def data_cleaning(self, words):
         try:
             logging.info(f"Entered into the Data cleaning function")
-            stemmer = SnowballStemmer("english")
+            stemmer = PorterStemmer()
             stopword = set(stopwords.words('english'))
             words = str(words).lower()
             words = re.sub(r'http\S+', '', words)
             words = re.sub(r'www\.\S+', '', words)
             words = re.sub(r'[^\w\s]', '', words)
             words = re.sub('\w*\d\w*', '', words)
-            words = [word for word in words.split(' ') if words not in stopword]
-            words = " ".join(words)
-            words = [stemmer.stem(word) for word in words.split(' ')]
-            words = " ".join(words)
+            tokens = word_tokenize(words)
+            # Remove stopwords and stem tokens
+            cleaned_tokens = [stemmer.stem(token) for token in tokens if token not in stopword]
+            # Join the tokens back into a single string
+            cleaned_text = ' '.join(cleaned_tokens)
             logging.info("Exited the data cleaning function")
-            return words
+            return cleaned_text
         except Exception as e:
             raise ModelException(e,sys)
         
@@ -56,7 +57,7 @@ class DataTransformation:
         try:
             logging.info("Entering data transformation function")
             data = self.load_data()
-            data['clean_text']=data.apply(self.data_cleaning)
+            data['text']=data['text'].apply(self.data_cleaning)
             data.to_csv(self.config.transform_data_path)
             logging.info("Data transformation is done")
         except Exception as e:

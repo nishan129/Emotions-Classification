@@ -19,5 +19,13 @@ class DataTransformationConfig:
     root_dir: Path
     data_path: Path
     transform_data_path: Path
-    
+   
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    data_path: Path
+    tokenizer_path: Path
+    model: Path
+    model_path: Path 
     
