@@ -19,5 +19,14 @@ model_trainer:
     data_path: artifacts/data_transformation/text.csv
     model : artifacts/model_trainer/model
     tokenizer_path: artifacts/model_trainer/tokenizer.pkl
-    model_path: artifacts/model_trainer/model/model.h5
+    model_path: artifacts/model_trainer/model/model.keras
+    
+
+model_evaluation:
+    root_dir: artifacts/model_evaluation
+    data_path: artifacts/data_transformation/text.csv
+    model_path: artifacts/model_trainer/model/model.keras
+    tokenizer_path: artifacts/model_trainer/tokenizer.pkl
+    mode_evaluation_path: artifacts/model_evaluation/model.keras
+    matrix_path: artifacts/model_evaluation/metrix.json
     

@@ -32,7 +32,7 @@ class ModelTrainer:
         
     def tokenizing(self,X_train):
         try:
-            tokenizer = Tokenizer(num_words=50000)
+            tokenizer = Tokenizer(num_words=60000)
             tokenizer.fit_on_texts(X_train)
             sequences = tokenizer.texts_to_sequences(X_train)
             sequences_matrix = pad_sequences(sequences,maxlen=300)
@@ -51,13 +51,14 @@ class ModelTrainer:
             
             model.fit(sequences_matrix, y_train, 
                         batch_size=200, 
-                        epochs = 1, 
+                        epochs = 5, 
                         validation_split=0.1, 
                         )
+            model.save(self.config.model_path)
             #os.makedirs(self.config.tokenizer_path)
             with open(self.config.tokenizer_path, 'wb') as handle:
                 pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
             #os.makedirs(self.config.model_path,exist_ok=True)
-            model.save(self.config.model_path)
+            #model.save(self.config.model_path)
         except Exception as e:
             raise ModelException(e,sys)

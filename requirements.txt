@@ -12,4 +12,5 @@ kaggle
 scikit-learn
 torch
 transformers
+h5py
 -e .

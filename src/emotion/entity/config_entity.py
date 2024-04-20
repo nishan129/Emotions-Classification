@@ -29,3 +29,12 @@ class ModelTrainerConfig:
     model: Path
     model_path: Path 
     
+    
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    data_path : Path
+    model_path: Path
+    tokenizer_path : Path
+    mode_evaluation_path : Path
+    matrix_path : Path
