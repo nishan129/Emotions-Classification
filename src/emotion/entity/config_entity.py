@@ -38,3 +38,8 @@ class ModelEvaluationConfig:
     tokenizer_path : Path
     mode_evaluation_path : Path
     matrix_path : Path
+    
+@dataclass(frozen=True)
+class PredictionConfig:
+    model_path: Path
+    tokenizer_path : Path

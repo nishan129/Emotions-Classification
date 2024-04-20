@@ -93,3 +93,12 @@ class ConfigurationManager:
             return model_evaluation_config
         except Exception as e:
             raise ModelException(e,sys)
+        
+    def get_prediction_config(self) -> PredictionConfig:
+        data_dir = self.config.prediction
+        
+        prediction_config = PredictionConfig(
+            model_path=data_dir.model_path,
+            tokenizer_path=data_dir.tokenizer_path,
+        )
+        return prediction_config

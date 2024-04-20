@@ -13,4 +13,6 @@ scikit-learn
 torch
 transformers
 h5py
+fastapi
+uvicorn
 -e .

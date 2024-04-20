@@ -30,3 +30,7 @@ model_evaluation:
     mode_evaluation_path: artifacts/model_evaluation/model.keras
     matrix_path: artifacts/model_evaluation/metrix.json
     
+
+prediction:
+    model_path: artifacts/model_evaluation/model.keras
+    tokenizer_path: artifacts/model_trainer/tokenizer.pkl
