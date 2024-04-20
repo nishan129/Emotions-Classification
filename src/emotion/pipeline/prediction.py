@@ -6,21 +6,26 @@ from src.emotion.entity.config_entity import PredictionConfig
 from tensorflow.keras.models import load_model
 from keras.utils import pad_sequences
 from src.emotion.utils.common import save_json, load_object
+from src.emotion.components.data_transformation import DataTransformation
+from src.emotion.entity.config_entity import DataTransformationConfig
 import sys
 import numpy as np
 import pandas as pd
 
 STAGE_NAME   = "Model Prediction"
 
+
 class PredictionPipeline:
     def __init__(self,config:PredictionConfig):
         self.config = config
-        
+        self.data_transform = DataTransformation(config=DataTransformationConfig)
     def predict(self, text:str):
         try:
             
             text = {"text":text, "index": 0}
             text = pd.DataFrame(text, index=[0])
+            
+            text['text'] = self.data_transform.data_cleaning(words=text['text'])
             model = load_model(self.config.model_path)
             tokenizer = load_object(self.config.tokenizer_path)
             

@@ -7,6 +7,7 @@ from starlette.responses import RedirectResponse
 from fastapi.responses import Response
 from src.emotion.pipeline.prediction import PredictionPipeline
 from src.emotion.config.configuration import ConfigurationManager
+from src.emotion.pipeline.training_pipeline import TrainingPipeline
 from src.emotion import ModelException, logging
 import pandas as pd
 
@@ -21,17 +22,17 @@ async def index():
 
 
 
-# @app.get("/train")
-# async def training():
-#     try:
-#         train_pipeline = TrainPipeline()
+@app.get("/train")
+async def training():
+    try:
+        train_pipeline = TrainingPipeline()
 
-#         train_pipeline.run_pipeline()
+        train_pipeline.main()
 
-#         return Response("Training successful !!")
+        return Response("Training successful !!")
 
-#     except Exception as e:
-#         return Response(f"Error Occurred! {e}")
+    except Exception as e:
+        return Response(f"Error Occurred! {e}")
     
 
 

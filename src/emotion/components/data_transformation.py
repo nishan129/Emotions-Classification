@@ -33,9 +33,9 @@ class DataTransformation:
         except Exception as e:
             raise ModelException(e,sys)
         
-    def data_cleaning(self, words):
+    @staticmethod
+    def data_cleaning(words):
         try:
-            logging.info(f"Entered into the Data cleaning function")
             stemmer = PorterStemmer()
             stopword = set(stopwords.words('english'))
             words = str(words).lower()
@@ -48,7 +48,6 @@ class DataTransformation:
             cleaned_tokens = [stemmer.stem(token) for token in tokens if token not in stopword]
             # Join the tokens back into a single string
             cleaned_text = ' '.join(cleaned_tokens)
-            logging.info("Exited the data cleaning function")
             return cleaned_text
         except Exception as e:
             raise ModelException(e,sys)
