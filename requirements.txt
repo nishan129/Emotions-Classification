@@ -15,4 +15,5 @@ transformers
 h5py
 fastapi
 uvicorn
+tensorflow-hub
 -e .
